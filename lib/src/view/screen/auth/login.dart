@@ -1,17 +1,18 @@
 
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test_interview/src/view/screen/user/all_user.dart';
 import 'package:test_interview/src/view/widget/customTextfield.dart';
 import 'package:test_interview/src/view/widget/k_Text.dart';
 import 'package:test_interview/src/view/widget/validator.dart';
 
 class LoginPage extends StatelessWidget {
- LoginPage({Key? key}) : super(key: key);
+ LoginPage({Key? key,}) : super(key: key);
 
  TextEditingController emailcontroller = TextEditingController();
  TextEditingController passwordcontroller = TextEditingController();
- bool isEmpty = true;
+ RxBool isEmpty = false.obs ;
+
 
  final _formKey = GlobalKey<FormState>();
   @override
@@ -30,12 +31,17 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    Image.asset("images/login_upper_picture.png",height: 186,fit: BoxFit.cover,),
 
-                    SizedBox(
+                    Container(
+                      child: Obx(() =>
+                        isEmpty.value == false ? Image.asset("images/login_upper_picture.png" ,height: 186,fit: BoxFit.cover,) : Image.asset("images/login_error_picture.png",height: 186,fit: BoxFit.cover,)
+                   ),
+                    ),
+
+               SizedBox(
                       height: 20,
                     ),
-    Row(
+            Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
                 KText(text: "Login Details",fontSize: 24,fontWeight: FontWeight.bold,),
@@ -53,6 +59,7 @@ class LoginPage extends StatelessWidget {
                     PasswordTextboxWidget(
                       controller: passwordcontroller,
                       hintText: "Password",
+                      isPassword: true,
 
 
                     ),
@@ -69,6 +76,9 @@ class LoginPage extends StatelessWidget {
 
                             if (_formKey.currentState!.validate()) {
                                 print("Login");
+                                Get.to(AllUserPage());
+                            }else{
+                              print("false");
 
                             }
 

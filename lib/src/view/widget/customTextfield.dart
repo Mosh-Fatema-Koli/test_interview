@@ -150,6 +150,11 @@ class SignUpTextField extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.blue, width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(10),
+
+          ),
 
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -241,7 +246,11 @@ class _PasswordTextboxWidgetState extends State<PasswordTextboxWidget> {
             borderRadius: BorderRadius.circular(10),
 
           ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(10),
 
+          ),
 
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
