@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:test_interview/src/view/screen/auth/login_controller.dart';
 import 'package:test_interview/src/view/screen/user/all_user.dart';
 import 'package:test_interview/src/view/widget/customTextfield.dart';
 import 'package:test_interview/src/view/widget/k_Text.dart';
@@ -9,12 +10,10 @@ import 'package:test_interview/src/view/widget/validator.dart';
 class LoginPage extends StatelessWidget {
  LoginPage({Key? key,}) : super(key: key);
 
- TextEditingController emailcontroller = TextEditingController();
- TextEditingController passwordcontroller = TextEditingController();
- RxBool isEmpty = false.obs ;
+ final LoginController _controller = Get.put(LoginController());
 
+ final formKey = GlobalKey<FormState>();
 
- final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class LoginPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Form(
-                key: _formKey,
+                key: formKey,
                 child: Column(
                   children: [
                     SizedBox(
@@ -34,7 +33,7 @@ class LoginPage extends StatelessWidget {
 
                     Container(
                       child: Obx(() =>
-                        isEmpty.value == false ? Image.asset("images/login_upper_picture.png" ,height: 186,fit: BoxFit.cover,) : Image.asset("images/login_error_picture.png",height: 186,fit: BoxFit.cover,)
+                      _controller.isValid.value ?  Image.asset("images/login_error_picture.png",height: 186,fit: BoxFit.cover,):Image.asset("images/login_upper_picture.png" ,height: 186,fit: BoxFit.cover,)
                    ),
                     ),
 
@@ -52,12 +51,12 @@ class LoginPage extends StatelessWidget {
                    ),
 
                     SignUpTextField(
-                      controller: emailcontroller,
+                      controller: _controller.usernameController,
                       hintText: "Username , email & phone number",
                       validator:Validators.emailValidator,
                     ),
                     PasswordTextboxWidget(
-                      controller: passwordcontroller,
+                      controller: _controller.passwordController,
                       hintText: "Password",
                       isPassword: true,
 
@@ -74,11 +73,12 @@ class LoginPage extends StatelessWidget {
                     ),
                     MaterialButton(onPressed: (){
 
-                            if (_formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                                 print("Login");
                                 Get.to(AllUserPage());
                             }else{
                               print("false");
+                              _controller.validateForm();
 
                             }
 
