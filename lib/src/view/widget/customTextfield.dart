@@ -129,7 +129,7 @@ class SignUpTextField extends StatelessWidget {
         initialValue: initialText,
         keyboardType: keybord,
         controller: controller,
-        inputFormatters: formatter,
+         inputFormatters: formatter,
         validator: validator,
         // onSaved: (String value) => data[keyy] = value,
         //  onChanged: onChangeFunction,
@@ -138,10 +138,11 @@ class SignUpTextField extends StatelessWidget {
         decoration: InputDecoration(
           // hoverColor: Colors.black,
           filled: true,
+          alignLabelWithHint: true,
           suffixText: suffixText,
           errorStyle: myStyle(
               12,
-              Color.fromARGB(234, 70, 69, 69).withOpacity(0.9),
+              Colors.red.withOpacity(0.9),
               FontWeight.w500),
           contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
           fillColor: Colors.white,
@@ -149,12 +150,18 @@ class SignUpTextField extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.blue, width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
+
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
               color: Colors.blue,
               width: 1,
             ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(10),
+
           ),
           labelText: lebelText,
           hintStyle: myStyle(15, Color.fromARGB(234, 70, 69, 69)),
@@ -175,6 +182,7 @@ class PasswordTextboxWidget extends StatefulWidget {
     this.keyboardType = TextInputType.name,
     this.isPassword = false,
     this.hintText,
+    this.lebelText,
     this.validator
   }) : super(key: key);
 
@@ -182,6 +190,7 @@ class PasswordTextboxWidget extends StatefulWidget {
   final bool isPassword;
   final TextInputType keyboardType;
   final String? hintText;
+  final String? lebelText;
   final Function ? validator;
 
   @override
@@ -227,6 +236,13 @@ class _PasswordTextboxWidgetState extends State<PasswordTextboxWidget> {
             borderSide: const BorderSide(color: Colors.blue, width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1),
+            borderRadius: BorderRadius.circular(10),
+
+          ),
+
+
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
@@ -236,6 +252,7 @@ class _PasswordTextboxWidgetState extends State<PasswordTextboxWidget> {
           ),
           border: InputBorder.none,
           hintText: widget.hintText,
+          labelText: widget.lebelText,
           hintStyle: TextStyle(
             color: Colors.grey.shade600,
             fontSize: 15,
